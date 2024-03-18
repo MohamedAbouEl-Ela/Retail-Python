@@ -1,0 +1,85 @@
+{% comment %}
+    <img src="data:image/png;base64, {{chart}}">
+    <br>
+<div>
+    <img src="data:image/png;base64, {{chart2}}">
+</div>
+{% endcomment %}
+
+{% load static %}
+  <link rel="stylesheet " href="{% static "css/style.css" %}">
+  
+ <!--
+  
+
+  -->
+  <div>Count of uniqe Product:  {{Product}}</div>
+  <div>Count of uniqe Total:  {{Total}}</div>
+      
+  <div style="height: 250px;width: 500px;">
+    <canvas id="myChart"></canvas>
+</div>
+<div style="height: 300px;width: 300px;">
+    <canvas id="myChart2"></canvas>
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+<script>
+var df1={{df1|safe}}
+var df2={{df2|safe}}
+
+const ctx = document.getElementById('myChart');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: df1,
+        datasets: [{
+          label: '# of Sales',
+          data: df2,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    var Product={{Product|safe}}
+    var Total={{Total|safe}}
+    const ctx2 = document.getElementById('myChart2');
+    new Chart(ctx2, {
+      type: 'pie',
+      data: {
+        labels: ['Total', 'Product'],
+        datasets: [{
+          label: '# of branch',
+          data: [{{Total}}, {{Product}}],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+
+</script>
+        
+
+
+          
+
+
+
+  
+
